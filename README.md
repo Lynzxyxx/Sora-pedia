@@ -1,17 +1,37 @@
 # Sora Pedia - SMM Panel
 
-Website SMM Panel siap deploy ke **Vercel**.
-Frontend statis (`public/`) + API serverless (`api/`) + **Firebase Realtime Database** + deposit otomatis **BuatQRIS** + **Admin Panel** (`/admin`).
+Website SMM Panel siap deploy ke **Vercel**, dibangun dengan **Next.js (App Router)**.
+Frontend di `app/` + API lewat **Route Handlers** (`app/api/**/route.js`) + **Firebase Realtime Database** + deposit otomatis **BuatQRIS** + **Admin Panel** (`/admin`).
 
 ## Struktur
 
 ```
-public/            index.html (landing + dasbor), admin.html, app.js, admin.js, style.css
-api/[...path].js   satu fungsi serverless untuk semua endpoint /api/*
-lib/               firebase, auth, buatqris (deposit), provider (layanan SMM), routes
-database.rules.json  aturan Realtime Database (semua akses lewat server)
-.env.example       daftar environment variable
+app/
+  layout.js               root layout (font, metadata, globals.css)
+  globals.css             stylesheet (sebelumnya public/style.css)
+  page.js                 landing + dasbor pengguna (sebelumnya public/index.html)
+  LandingBoot.js          pemicu logika frontend setelah markup ter-mount
+  admin/page.js           halaman admin (metadata noindex)
+  admin/AdminPanel.js     markup admin (sebelumnya public/admin.html)
+  api/**/route.js         Route Handler Next.js untuk tiap endpoint /api/*
+lib/
+  handlers.js             logika bisnis tiap endpoint (sebelumnya lib/routes.js)
+  route.js                adapter body + error handling untuk Route Handler
+  firebase.js, auth.js, buatqris.js, provider.js, defaultServices.js, http.js
+  client/landing.js       logika frontend (sebelumnya public/app.js)
+  client/admin.js         logika admin panel (sebelumnya public/admin.js)
+next.config.mjs           header keamanan (sebelumnya vercel.json)
+database.rules.json       aturan Realtime Database (semua akses lewat server)
+.env.example              daftar environment variable
 ```
+
+Routing `/api/*` kini ditangani otomatis oleh struktur folder `app/api/**`, jadi tidak ada lagi
+`api/[...path].js` maupun `vercel.json`.
+
+## Runtime
+
+Node.js **22 LTS** (`engines.node: 22.x`, lihat juga `.nvmrc`). Kalau mau memakai Node 24 di Vercel,
+ubah `engines.node` menjadi `24.x` lalu pilih versi Node yang sama di **Project Settings > Node.js Version**.
 
 ## Langkah deploy
 
@@ -20,7 +40,7 @@ database.rules.json  aturan Realtime Database (semua akses lewat server)
    - Menu **Rules**: tempel isi `database.rules.json` lalu Publish. Rules ini mengunci akses langsung dari klien; semua data diakses lewat server (Admin SDK).
    - Menu **Project settings > Service accounts > Generate new private key**. Dari file JSON ambil `project_id`, `client_email`, `private_key`.
 
-2. **Upload ke GitHub** (file `.env` jangan ikut, sudah ada di `.gitignore`), lalu **Import Project** di Vercel. Framework Preset: **Other**. Tidak perlu build command.
+2. **Upload ke GitHub** (file `.env` jangan ikut, sudah ada di `.gitignore`), lalu **Import Project** di Vercel. Framework Preset: **Next.js** (terdeteksi otomatis). Build command bawaan `next build`.
 
 3. **Environment Variables** di Vercel (Settings > Environment Variables). Nama dan penjelasan lengkap ada di `.env.example`:
 
@@ -48,7 +68,7 @@ database.rules.json  aturan Realtime Database (semua akses lewat server)
 
 1. User isi nominal, server memanggil `api_create_qris` (Secret Token hanya ada di server).
 2. QR ditampilkan di halaman deposit, user membayar lewat e-wallet / m-banking.
-3. BuatQRIS mengirim webhook `payment.success` bertanda tangan HMAC-SHA256. Server memverifikasi signature dan nominal, lalu menambah saldo sekali saja (aman dari kredit ganda).
+3. BuatQRIS mengirim webhook `payment.success` bertanda tangan HMAC-SHA256. Server membaca **raw body** lewat `request.text()`, memverifikasi signature dan nominal, lalu menambah saldo sekali saja (aman dari kredit ganda).
 
 ## Admin Panel (`/admin`)
 
@@ -64,6 +84,8 @@ Ringkasan, kelola pengguna (ubah saldo, blokir), pesanan (ubah status, refund ot
 
 ```
 npm install
-npx vercel dev
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 Buat file `.env.local` dari `.env.example`.

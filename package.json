@@ -1,0 +1,23 @@
+{
+  "name": "sora-pedia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sora Pedia - SMM Panel (Next.js App Router + Vercel + Firebase Realtime Database + BuatQRIS)",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "next": "^15.5.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.35.0",
+    "eslint-config-next": "^15.5.3"
+  }
+}

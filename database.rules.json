@@ -1,0 +1,10 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "orders": { ".indexOn": ["uid", "createdAt"] },
+    "deposits": { ".indexOn": ["uid", "createdAt"] },
+    "tickets": { ".indexOn": ["uid", "createdAt"] },
+    "news": { ".indexOn": ["createdAt"] }
+  }
+}
