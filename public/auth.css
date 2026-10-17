@@ -1,0 +1,22 @@
+/* Halaman /login dan /daftar (memakai variabel warna dari style.css) */
+body.auth-page{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:20px 16px;background:linear-gradient(160deg,var(--hero),#4bb1d2)}
+.auth-wrap{width:100%;max-width:440px}
+.auth-brand{display:flex;justify-content:center;margin-bottom:14px}
+.auth-brand .logo{color:#fff}
+.auth-brand .logo b{color:#0e4a60}
+:root[data-theme="dark"] .auth-brand .logo b{color:#fff}
+.auth-card{background:var(--surface);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.auth-card .abody{padding:22px 24px 26px}
+.auth-card h1{font-size:24px;line-height:1.2}
+.auth-card form label:first-child{margin-top:16px}
+.showpw{display:flex;align-items:center;gap:8px;margin-top:10px;font-weight:500;font-size:14px;color:var(--muted)}
+.showpw input{width:auto}
+.auth-foot{text-align:center;margin-top:18px;color:var(--muted);font-size:15px}
+.auth-foot a{color:var(--deep);font-weight:600;text-decoration:underline}
+:root[data-theme="dark"] .auth-foot a{color:#8fdcf4}
+.auth-home{display:block;text-align:center;margin-top:14px;color:#fff;font-size:14px;text-decoration:underline;opacity:.92}
+/* Daftar: potongan close-up, label kuning, tombol biru tua */
+body[data-mode="register"] .auth-art{aspect-ratio:736/250;object-position:78% 70%;filter:saturate(1.15) brightness(1.05)}
+body[data-mode="register"] .auth-badge{background:#f6c453;color:#3a2a00;border-color:transparent}
+body[data-mode="register"] #authGo{background:var(--deep);color:#fff}
+body[data-mode="register"] #authGo:hover{background:#15566b;color:#fff}

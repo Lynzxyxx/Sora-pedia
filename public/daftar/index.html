@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daftar - Sora Pedia</title>
+<meta name="description" content="Daftar akun Sora Pedia gratis dan mulai pakai layanan social media marketing.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('sp_theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/auth.css">
+</head>
+<body class="auth-page" data-mode="register">
+<main class="auth-wrap">
+  <div class="auth-brand">
+    <a href="/" class="logo" aria-label="Sora Pedia, ke beranda"><span class="mk"><svg class="i" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-3-7-7-1z"/></svg></span><span><b>SORA</b> PEDIA</span></a>
+  </div>
+  <section class="auth-card" aria-labelledby="authTitle">
+    <div class="auth-hero">
+      <img class="auth-art" src="/img/welcome.jpg" width="736" height="414" alt="Selamat datang di Sora Pedia">
+      <span class="auth-badge">Gabung sekarang</span>
+    </div>
+    <div class="abody">
+      <h1 id="authTitle">Daftar Sora Pedia</h1>
+      <p class="hint" style="margin-top:4px">Buat akun baru dalam hitungan detik.</p>
+      <ul class="perks" aria-label="Keuntungan mendaftar">
+        <li>Gratis daftar, langsung bisa dipakai</li>
+        <li>Deposit otomatis lewat QRIS</li>
+        <li>Ratusan layanan dengan harga murah</li>
+      </ul>
+      <form id="authForm" novalidate>
+        <label for="aName">Nama</label>
+        <input id="aName" autocomplete="name" maxlength="60" required>
+        <label for="aEmail">Email</label>
+        <input id="aEmail" type="email" autocomplete="email" inputmode="email" required>
+        <label for="aPass">Password</label>
+        <input id="aPass" type="password" autocomplete="new-password" required>
+        <label class="showpw"><input type="checkbox" id="showPw"> Tampilkan password</label>
+        <p class="hint" style="margin-top:6px">Minimal 8 karakter.</p>
+        <p class="err" id="authErr" role="alert"></p>
+        <button class="btn btn-full" id="authGo" type="submit">Buat akun</button>
+      </form>
+      <p class="auth-foot">Sudah punya akun? <a href="/login">Masuk di sini</a></p>
+    </div>
+  </section>
+  <a class="auth-home" href="/">&larr; Kembali ke beranda</a>
+</main>
+<script src="/auth.js"></script>
+</body>
+</html>

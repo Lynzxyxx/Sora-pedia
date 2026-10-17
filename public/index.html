@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sora Pedia - Social Media Marketing Panel Indonesia Termurah🤩</title>
+<title>Sora Pedia - Social Media Marketing Panel Indonesia</title>
 <meta name="description" content="Sora Pedia: SMM Panel Indonesia dengan layanan followers, likes, views, dan subscribe untuk Instagram, TikTok, YouTube, dan lainnya.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,8 @@
         <a href="#utama">Utama</a>
         <a href="#layanan-l">Layanan</a>
         <a href="#kontak">Kontak</a>
+        <a href="/login">Masuk</a>
+        <a href="/daftar">Daftar</a>
         <button class="btn-white" data-open-app><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="14" width="8" height="7" rx="1"/></svg>Dasbor</button>
       </nav>
     </div>
@@ -98,11 +100,21 @@
 
 <!-- ===== AUTH ===== -->
 <dialog id="authDlg" aria-labelledby="authTitle">
+  <div class="auth-hero">
+    <img class="auth-art" src="/img/welcome.jpg" width="736" height="414" alt="Selamat datang di Sora Pedia">
+    <span class="auth-badge" id="authBadge">Selamat datang kembali</span>
+  </div>
   <div class="dlg">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h2 id="authTitle" style="font-size:22px">Masuk ke Sora Pedia</h2>
       <button class="ib" id="authClose" aria-label="Tutup"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
+    <p class="hint" id="authSub" style="margin-top:4px">Masuk untuk melanjutkan pesananmu.</p>
+    <ul class="perks hidden" id="authPerks" aria-label="Keuntungan mendaftar">
+      <li>Gratis daftar, langsung bisa dipakai</li>
+      <li>Deposit otomatis lewat QRIS</li>
+      <li>Ratusan layanan dengan harga murah</li>
+    </ul>
     <div class="tabs" role="tablist"><button class="on" data-tab="login" role="tab">Masuk</button><button data-tab="register" role="tab">Daftar</button></div>
     <div id="fName" class="hidden"><label for="aName">Nama</label><input id="aName" autocomplete="name"></div>
     <label for="aEmail">Email</label><input id="aEmail" type="email" autocomplete="email" inputmode="email">
@@ -140,6 +152,12 @@
 <div class="chatbox hidden" id="chatBox">
   <header>Butuh bantuan?</header>
   <div class="body"><p>Kirim tiket lewat menu <b>Tiket</b> di dasbor, admin akan membalas secepatnya.</p><button class="btn btn-full" id="chatTicket">Buka Tiket</button></div>
+</div>
+
+<!-- ===== GOODBYE (muncul saat keluar akun) ===== -->
+<div id="byeScreen" class="bye hidden" role="dialog" aria-label="Sampai jumpa" tabindex="-1">
+  <img src="/img/goodbye.jpg" width="736" height="414" alt="Sampai jumpa di Sora Pedia">
+  <p>Sampai jumpa lagi!</p>
 </div>
 
 <script src="/app.js"></script>
