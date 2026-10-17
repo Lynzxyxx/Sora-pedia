@@ -91,11 +91,6 @@ function setAuthMode(m) {
   $('#aPass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
   $('#passHint').textContent = m === 'register' ? 'Minimal 8 karakter.' : '';
   $('#authErr').textContent = '';
-  /* pembeda tampilan Masuk vs Daftar */
-  $('#authDlg').dataset.mode = m;
-  $('#authBadge').textContent = m === 'login' ? 'Selamat datang kembali' : 'Gabung sekarang';
-  $('#authSub').textContent = m === 'login' ? 'Masuk untuk melanjutkan pesananmu.' : 'Buat akun baru dalam hitungan detik.';
-  $('#authPerks').classList.toggle('hidden', m !== 'register');
 }
 $$('.tabs button').forEach((b) => (b.onclick = () => setAuthMode(b.dataset.tab)));
 $('#authClose').onclick = () => $('#authDlg').close();
@@ -115,7 +110,7 @@ $('#authDlg').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#au
 
 $$('[data-open-app]').forEach((b) => (b.onclick = async () => {
   if (token) { try { await enterApp(); return; } catch (e) {} }
-  location.href = '/login';
+  setAuthMode('login'); $('#authDlg').showModal();
 }));
 
 async function enterApp() {
@@ -129,22 +124,10 @@ async function enterApp() {
 function logout(show = true) {
   token = null; me = null; ls.del('sp_token'); clearInterval(pollTimer); clearInterval(cdTimer);
   $('#app').classList.add('hidden'); $('#landing').classList.remove('hidden'); $('#dd').classList.add('hidden');
-  if (show) { toast('Kamu sudah keluar.'); showBye(); }
+  if (show) toast('Kamu sudah keluar.');
   window.scrollTo(0, 0);
 }
 $('#logout').onclick = () => logout();
-
-/* layar Goodbye saat keluar akun */
-let byeTimer = null;
-function hideBye() { clearTimeout(byeTimer); $('#byeScreen').classList.add('hidden'); }
-function showBye() {
-  const b = $('#byeScreen');
-  b.classList.remove('hidden'); b.focus();
-  clearTimeout(byeTimer); byeTimer = setTimeout(hideBye, 2400);
-}
-$('#byeScreen').onclick = hideBye;
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideBye(); });
-new Image().src = '/img/goodbye.jpg'; /* muat lebih awal supaya langsung tampil */
 $('#homeLink').onclick = (e) => { e.preventDefault(); view('dasbor'); };
 
 /* ---------- menu ---------- */
@@ -316,7 +299,7 @@ $('#chatBtn').classList.remove('hidden');
 $('#chatBtn').onclick = () => $('#chatBox').classList.toggle('hidden');
 $('#chatTicket').onclick = async () => {
   $('#chatBox').classList.add('hidden');
-  if (token && me) view('tiket'); else location.href = '/login';
+  if (token && me) view('tiket'); else { setAuthMode('login'); $('#authDlg').showModal(); }
 };
 
 /* auto-masuk kalau sesi masih ada */
