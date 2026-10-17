@@ -183,26 +183,3 @@ td .acts{display:flex;gap:6px;flex-wrap:wrap}
 @media(min-width:700px){.grid2{grid-template-columns:1fr 1fr}}
 .login-card{max-width:400px;margin:12vh auto 0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* ===== Gambar Welcome (login/daftar) & Goodbye (keluar) ===== */
-#authDlg{overflow-x:hidden;overflow-y:auto;max-height:calc(100dvh - 24px)}
-.auth-art{display:block;width:100%;height:auto;aspect-ratio:736/414;object-fit:cover;background:#0b2a3f}
-#authDlg .dlg{padding-top:18px}
-.bye{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0b2a3f;padding:20px;animation:byeIn .35s ease both;cursor:pointer}
-.bye img{width:min(720px,100%);height:auto;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.bye p{color:#cfeaf5;font-weight:600;font-size:18px;letter-spacing:.3px}
-@keyframes byeIn{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.bye{animation:none}}
-
-/* ===== Pembeda tampilan Masuk vs Daftar ===== */
-.auth-hero{position:relative}
-.auth-badge{position:absolute;left:14px;bottom:12px;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.2px;background:rgba(6,40,58,.78);color:#e8f8ff;backdrop-filter:blur(4px);border:1px solid rgba(143,220,244,.45)}
-.perks{list-style:none;margin:12px 0 2px;padding:12px 14px;border-radius:14px;background:var(--soft);display:grid;gap:6px;font-size:14px}
-.perks li{display:flex;gap:10px;align-items:flex-start}
-.perks li::before{content:"\2713";color:var(--deep);font-weight:700;flex:none}
-:root[data-theme="dark"] .perks li::before{color:#8fdcf4}
-/* Daftar: potongan close-up (kucing & dermaga), lebih pendek, tombol warna lain */
-#authDlg[data-mode="register"] .auth-art{aspect-ratio:736/250;object-position:78% 70%;filter:saturate(1.15) brightness(1.05)}
-#authDlg[data-mode="register"] .auth-badge{background:#f6c453;color:#3a2a00;border-color:transparent}
-#authDlg[data-mode="register"] #authGo{background:var(--deep);color:#fff}
-#authDlg[data-mode="register"] #authGo:hover{background:#15566b;color:#fff}
